@@ -15,7 +15,7 @@ locals {
   image_tag = "v1"  
 
   repo_url = "https://github.com/bohdanzai/demo3_codebuild.git"
-  branch_pattern = "^refs/heads/main$"
+  branch_pattern = "^refs/heads/master$"
   git_trigger_event = "PUSH"
 }
 
