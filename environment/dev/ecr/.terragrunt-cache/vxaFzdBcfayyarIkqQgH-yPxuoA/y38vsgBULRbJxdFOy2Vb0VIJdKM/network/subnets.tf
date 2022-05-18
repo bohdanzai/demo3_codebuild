@@ -40,18 +40,18 @@ resource "aws_subnet" "publicsubnet" {
 # }
 
 ////////////////////////////////////////////////////////
-# resource "aws_subnet" "privatesubnet" {
-#   for_each                = toset(var.privateSubnetCIDR)
-#   cidr_block              = each.key
-#   vpc_id                  = aws_vpc.dev_vpc.id
-#   map_public_ip_on_launch = false
-#   availability_zone       = element(data.aws_availability_zones.availableAZ.names, index(var.privateSubnetCIDR, each.key))
-#   tags = {
-#     name        = "${var.environment}-privatesubnet-${index(var.privateSubnetCIDR, each.key) + 1}"
-#     AZ          = element(data.aws_availability_zones.availableAZ.names, index(var.privateSubnetCIDR, each.key))
-#     Environment = "${var.environment}-privatesubnet"
-#   }
-# }
+resource "aws_subnet" "privatesubnet" {
+  for_each                = toset(var.privateSubnetCIDR)
+  cidr_block              = each.key
+  vpc_id                  = aws_vpc.dev_vpc.id
+  map_public_ip_on_launch = false
+  availability_zone       = element(data.aws_availability_zones.availableAZ.names, index(var.privateSubnetCIDR, each.key))
+  tags = {
+    name        = "${var.environment}-privatesubnet-${index(var.privateSubnetCIDR, each.key) + 1}"
+    AZ          = element(data.aws_availability_zones.availableAZ.names, index(var.privateSubnetCIDR, each.key))
+    Environment = "${var.environment}-privatesubnet"
+  }
+}
 
 #=============================== Internet gateway ==================================
 
@@ -78,29 +78,29 @@ resource "aws_route_table_association" "routeTableAssociationPublicRoute" {
   subnet_id      = aws_subnet.publicsubnet[var.publicSubnetCIDR[count.index]].id
 }
 
-#=============================== NAT gateway ========================================
-# resource "aws_eip" "nat_eip" {
-#   count = length(var.publicSubnetCIDR)
+# =============================== NAT gateway ========================================
+resource "aws_eip" "nat_eip" {
+  count = length(var.publicSubnetCIDR)
 
-# }
-# resource "aws_nat_gateway" "nat-gateway" {
-#   count         = length(var.publicSubnetCIDR)
-#   # subnet_id     = aws_subnet.publicsubnet[count.index].id
-#   subnet_id     = aws_subnet.publicsubnet[var.publicSubnetCIDR[count.index]].id
-#   allocation_id = aws_eip.nat_eip[count.index].id
-# }
+}
+resource "aws_nat_gateway" "nat-gateway" {
+  count         = length(var.publicSubnetCIDR)
+  # subnet_id     = aws_subnet.publicsubnet[count.index].id
+  subnet_id     = aws_subnet.publicsubnet[var.publicSubnetCIDR[count.index]].id
+  allocation_id = aws_eip.nat_eip[count.index].id
+}
 
-# resource "aws_route_table" "nat_routetable" {
-#   vpc_id = aws_vpc.dev_vpc.id
-#   count  = length(var.publicSubnetCIDR)
-#   route {
-#     cidr_block = var.route_cidr
-#     gateway_id = aws_nat_gateway.nat-gateway[count.index].id
-#   }
-#   depends_on = [aws_nat_gateway.nat-gateway]
-# }
-# resource "aws_route_table_association" "nat_routeTableAssociation" {
-#   count          = length(var.privateSubnetCIDR)
-#   route_table_id = aws_route_table.nat_routetable[count.index].id
-#   subnet_id      = aws_subnet.privatesubnet[var.privateSubnetCIDR[count.index]].id
-# }
+resource "aws_route_table" "nat_routetable" {
+  vpc_id = aws_vpc.dev_vpc.id
+  count  = length(var.publicSubnetCIDR)
+  route {
+    cidr_block = var.route_cidr
+    gateway_id = aws_nat_gateway.nat-gateway[count.index].id
+  }
+  depends_on = [aws_nat_gateway.nat-gateway]
+}
+resource "aws_route_table_association" "nat_routeTableAssociation" {
+  count          = length(var.privateSubnetCIDR)
+  route_table_id = aws_route_table.nat_routetable[count.index].id
+  subnet_id      = aws_subnet.privatesubnet[var.privateSubnetCIDR[count.index]].id
+}
