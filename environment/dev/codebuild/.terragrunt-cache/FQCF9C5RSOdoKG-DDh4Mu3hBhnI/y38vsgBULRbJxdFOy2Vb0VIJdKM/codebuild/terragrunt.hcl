@@ -28,6 +28,6 @@ inputs = merge(
   {
     vpc_id = dependency.network.outputs.vpc_id
     subnets = dependency.network.outputs.subnets
-    build_spec_file = "providers/dev/buildspec.yml"
+    build_spec_file = "environment/dev/buildspec.yml"
   }
 )
