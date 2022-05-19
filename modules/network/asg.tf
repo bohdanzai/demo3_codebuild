@@ -58,8 +58,8 @@ resource "aws_autoscaling_group" "Demo-ASG-tf" {
     id = aws_launch_template.webserver_launch_tpl.id
     version = "1"
   }
-  # vpc_zone_identifier  = [for subnet in aws_subnet.privatesubnet : subnet.id]
-  vpc_zone_identifier  = [for subnet in aws_subnet.publicsubnet : subnet.id]
+   vpc_zone_identifier  = [for subnet in aws_subnet.privatesubnet : subnet.id]
+  # vpc_zone_identifier  = [for subnet in aws_subnet.publicsubnet : subnet.id]
 
   tag {
     key                 = "Name"

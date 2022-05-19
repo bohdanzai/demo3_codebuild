@@ -31,7 +31,10 @@ resource "aws_iam_role_policy_attachment" "ecs_full_access" {
   role = aws_iam_role.role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
 }
-
+resource "aws_iam_role_policy_attachment" "ssm-full-access-iam-policy" {
+  role       = aws_iam_role.role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
+}
 
 # CodeBuild IAM policy
 resource "aws_iam_role_policy" "role_policy" {
