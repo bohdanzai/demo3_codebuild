@@ -34,9 +34,10 @@ phases:
       - make build
       - echo "$TAG"
       - echo "$image_tag"
-      - cd ${CODEBUILD_SRC_DIR} 
-      - terragrunt plan --terragrunt-working-dir environment/dev/ecs -var="image_tag=${TAG}" -no-color -input=false -out plan.out
-      - terragrunt apply --terragrunt-working-dir environment/dev/ecs -auto-approve -no-color -input=false plan.out
+      - cd "$CODEBUILD_SRC_DIR"/environment/dev
+      - pwd 
+      - terragrunt plan --terragrunt-working-dir ecs/ -var="image_tag=${IMAGE_TAG}"
+      - terragrunt apply --terragrunt-working-dir ecs/ -var="image_tag=${IMAGE_TAG}" -auto-approve
 
 
   post_build:
