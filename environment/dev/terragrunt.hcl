@@ -12,11 +12,12 @@ locals {
   aws_account = "873432059572"
   aws_profile = "default"
   aws_region = "eu-central-1"
-  image_tag = "v1"  
+  image_tag = "0.0.1"  
 
   repo_url = "https://github.com/bohdanzai/demo3_codebuild.git"
   branch_pattern = "^refs/heads/master$"
   git_trigger_event = "PUSH"
+  app_count = 1
 }
 
 inputs = {
@@ -30,6 +31,7 @@ inputs = {
   repo_url = local.repo_url
   branch_pattern = local.branch_pattern
   git_trigger_event = local.git_trigger_event
+  app_count = local.app_count
 }
 
 remote_state {

@@ -16,7 +16,8 @@ resource "aws_ecs_task_definition" "app" {
   # container_definitions = "${file("./modules/ecs/task_def.json.tpl")}"
   container_definitions = jsonencode([{
     name        = "${var.app_name}-${var.environment}-container"
-    image       = "${var.ecr_repository_url}/${var.app_name}-${var.environment}:${var.image_tag}"
+    # image       = "${var.ecr_repository_url}/${var.app_name}-${var.environment}:${var.image_tag}"
+    image       = "${var.ecr_repository_url}:${var.image_tag}"
     essential   = true
     cpu         = var.container_cpu
     memory      = var.container_ram

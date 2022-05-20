@@ -11,7 +11,8 @@ resource "null_resource" "build" {
     environment = {
       TAG               = var.image_tag
       REPO_REGION       = var.aws_region
-      ECR_REPO_URL      = var.ecr_repository_url
+      # ECR_REPO_URL      = var.ecr_repository_url
+       ECR_REPO_URL      = aws_ecr_repository.ecr_repository.repository_url
       APP_NAME          = var.app_name
       ENV_NAME          = var.environment
     }
