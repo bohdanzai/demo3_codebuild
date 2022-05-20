@@ -36,8 +36,9 @@ phases:
       - echo "$image_tag"
       - cd "$CODEBUILD_SRC_DIR"/environment/dev
       - pwd 
-      - terragrunt plan --terragrunt-working-dir ecs/ -var="image_tag=${IMAGE_TAG}"
-      - terragrunt apply --terragrunt-working-dir ecs/ -var="image_tag=${IMAGE_TAG}" -auto-approve
+      # - terragrunt plan --terragrunt-working-dir ecs/ -var="image_tag=${IMAGE_TAG}"
+      # - terragrunt apply --terragrunt-working-dir ecs/ -var="image_tag=${IMAGE_TAG}" -auto-approve
+      - terragrunt run-all apply
 
 
   post_build:
