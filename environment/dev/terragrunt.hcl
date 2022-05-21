@@ -44,6 +44,7 @@ remote_state {
     region         = local.aws_region
     # dynamodb_table = format("tflock-%s-%s-%s", local.environment, local.app_name, local.aws_region)
     dynamodb_table = "my-lock-table"
+    profile        = local.aws_profile
   }
 }
 
