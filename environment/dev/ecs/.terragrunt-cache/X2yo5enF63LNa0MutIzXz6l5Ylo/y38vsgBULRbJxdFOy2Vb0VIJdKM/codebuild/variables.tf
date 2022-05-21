@@ -12,10 +12,8 @@ variable "repo_url" {
   description = "URL to Github repository to fetch source from"
 }
 
-variable "github_oauth_token" {
-  description = "Github OAuth token with repo access permissions"
-  default = "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"
-}
+# variable "github_oauth_token" {
+# }
 
 variable "environment" {
   type = string
