@@ -1,4 +1,3 @@
-
 data "aws_caller_identity" "current_identity" {}
 data "aws_region" "current_region" {}
 
@@ -31,12 +30,10 @@ resource "aws_iam_role_policy_attachment" "ecs_full_access" {
   role = aws_iam_role.role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
 }
-resource "aws_iam_role_policy_attachment" "ssm-full-access-iam-policy" {
-  role       = aws_iam_role.role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
-}
 
-# CodeBuild IAM policy
+
+# CodeBuild IAM policy (one per project)
+# https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAM.ServiceLinkedRoles.html
 resource "aws_iam_role_policy" "role_policy" {
   role = aws_iam_role.role.name
   name = "codebuild-policy-${local.codebuild_project_name}"
@@ -138,7 +135,6 @@ resource "aws_iam_role_policy" "role_policy" {
       "Effect": "Allow",
       "Action": [
           "elasticache:*"
-
       ],
       "Resource": "*"
     },
@@ -179,6 +175,13 @@ resource "aws_iam_role_policy" "role_policy" {
           "ec2:AuthorizedService": "codebuild.amazonaws.com"
         }
       }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:*"
+      ],
+      "Resource": "*"
     }
   ]
 }

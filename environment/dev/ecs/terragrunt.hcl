@@ -16,5 +16,4 @@ dependency "ecr" {
 
 inputs = {
     ecr_repository_url = dependency.ecr.outputs.ecr_repository_url
-    image_tag = dependency.ecr.outputs.image_tag
   }
