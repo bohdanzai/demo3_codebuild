@@ -38,7 +38,8 @@ phases:
       - pwd 
       # - terragrunt plan --terragrunt-working-dir ecs/ -var="image_tag=${IMAGE_TAG}"
       # - terragrunt apply --terragrunt-working-dir ecs/ -var="image_tag=${IMAGE_TAG}" -auto-approve
-      - terragrunt run-all apply -auto-approve -no-color -input=false
+      - terragrunt run-all plan
+      # - terragrunt run-all apply -auto-approve -no-color -input=false
 
 
   post_build:
