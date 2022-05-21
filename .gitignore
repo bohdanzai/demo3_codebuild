@@ -6,4 +6,3 @@ terraform.tfstate.backup
 *.lock.hcl
 .terraform.lock.hcl
 .terraform/
-variables.tf
