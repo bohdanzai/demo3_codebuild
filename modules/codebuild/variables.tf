@@ -12,8 +12,8 @@ variable "repo_url" {
   description = "URL to Github repository to fetch source from"
 }
 
-variable "github_oauth_token" {
-}
+# variable "github_oauth_token" {
+# }
 
 variable "environment" {
   type = string
