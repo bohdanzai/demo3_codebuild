@@ -1,10 +1,6 @@
-variable "aws_region" {
-  description = "aws region"
-}
+variable "aws_region" {}
 
-variable "aws_profile" {
-  description = "aws profile"
-}
+variable "aws_profile" {}
 
 variable "remote_state_bucket" {}
 

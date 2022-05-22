@@ -5,7 +5,7 @@
 
 variable "aws_region" {}
 variable "aws_profile" {}
-
+variable "remote_state_bucket" {}
 variable "instance_type" {
   type = string
   default = "t2.micro"
