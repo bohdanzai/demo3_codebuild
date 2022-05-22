@@ -36,9 +36,9 @@ phases:
       - echo "$image_tag"
       - cd "$CODEBUILD_SRC_DIR"
       - pwd 
-      - terragrunt plan --terragrunt-working-dir environment/dev/ecs/ -var="image_tag=${TAG}" -no-color -input=false -out plan.out
-      - terragrunt apply --terragrunt-working-dir environment/dev/ecs/ -auto-approve -no-color -input=false plan.out
-      # - terragrunt run-all plan
+      # - terragrunt plan --terragrunt-working-dir environment/dev/ecs/ -var="image_tag=${TAG}" -no-color -input=false -out plan.out
+      # - terragrunt apply --terragrunt-working-dir environment/dev/ecs/ -auto-approve -no-color -input=false plan.out
+      --terragrunt-working-dir environment/dev - terragrunt run-all plan
       # - terragrunt run-all apply -auto-approve -no-color -input=false
 
 
