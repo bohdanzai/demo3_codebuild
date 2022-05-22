@@ -42,7 +42,6 @@ remote_state {
     bucket         = format("%s-%s-%s-%s", local.remote_state_bucket_prefix, local.app_name, local.environment, local.aws_region)
     key            = format("%s/terraform.tfstate", path_relative_to_include())
     region         = local.aws_region
-    # dynamodb_table = format("tflock-%s-%s-%s", local.environment, local.app_name, local.aws_region)
     dynamodb_table = "my-lock-table"
     profile        = local.aws_profile
   }
