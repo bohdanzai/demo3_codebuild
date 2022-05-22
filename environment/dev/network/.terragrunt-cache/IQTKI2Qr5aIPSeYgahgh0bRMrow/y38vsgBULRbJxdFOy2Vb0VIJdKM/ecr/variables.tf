@@ -18,6 +18,7 @@ variable "image_tag" {
 
 variable "aws_region" {}
 variable "aws_profile" {}
+variable "remote_state_bucket" {}
 
 variable "working_dir" {
     type = string
