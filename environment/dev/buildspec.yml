@@ -33,7 +33,7 @@ phases:
       - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV}"
       - echo "$AWS_PROFILE"
       - echo "Building version ${TAG}"
-      - make build
+      # - make build
       - echo "$TAG"
       - echo "$image_tag"
       - cd "$CODEBUILD_SRC_DIR"
