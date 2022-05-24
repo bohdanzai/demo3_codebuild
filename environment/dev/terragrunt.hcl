@@ -5,7 +5,7 @@ locals {
   environment = "dev"
   app_name = "demo3"
   aws_account = "873432059572"
-  aws_profile = "default"
+  # aws_profile = "default"
   aws_region = "eu-central-1"
   image_tag = "0.0.1"  
 
@@ -20,7 +20,7 @@ inputs = {
   environment = local.environment
   app_name = local.app_name
   aws_account = local.aws_account
-  aws_profile = local.aws_profile
+  # aws_profile = local.aws_profile
   aws_region = local.aws_region
   image_tag = local.image_tag
   repo_url = local.repo_url
@@ -38,9 +38,8 @@ remote_state {
     key            = format("%s/terraform.tfstate", path_relative_to_include())
     region         = local.aws_region
     dynamodb_table = "my-lock-table"
-    profile        = local.aws_profile
-    # disable_bucket_update = true
-  }
+    # profile        = local.aws_profile
+    }
 }
 
 terraform {
