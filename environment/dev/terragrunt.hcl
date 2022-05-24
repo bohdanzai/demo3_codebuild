@@ -1,9 +1,4 @@
-# terraform {
-#   source = "/home/bohdan/Dev_ops/demo3_tg/modules//network"
-#   extra_arguments "custom_vars" {
-#     commands = get_terraform_commands_that_need_vars()
-#   }
-# }
+
 
 locals {
   remote_state_bucket_prefix = "tfstate"
