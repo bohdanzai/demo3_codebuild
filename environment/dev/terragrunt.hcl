@@ -36,7 +36,7 @@ inputs = {
 
 remote_state {
   backend = "s3"
-
+  
   config = {
     encrypt        = true
     bucket         = format("%s-%s-%s-%s", local.remote_state_bucket_prefix, local.app_name, local.environment, local.aws_region)
@@ -44,6 +44,7 @@ remote_state {
     region         = local.aws_region
     dynamodb_table = "my-lock-table"
     profile        = local.aws_profile
+    # disable_bucket_update = true
   }
 }
 
