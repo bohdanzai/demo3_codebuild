@@ -1,5 +1,3 @@
-
-
 locals {
   remote_state_bucket_prefix = "tfstate"
   environment = "dev"
