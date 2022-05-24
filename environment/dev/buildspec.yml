@@ -43,7 +43,7 @@ phases:
       - pwd 
       # - echo "Y" | terragrunt plan --terragrunt-working-dir environment/dev/ecs/ -var="image_tag=${TAG}" -no-color -input=false -out plan.out
       - terragrunt plan --terragrunt-working-dir environment/dev/ecs/ -var="image_tag=0.0.1" -no-color -input=false -out plan.out
-      # - terragrunt apply --terragrunt-working-dir environment/dev/ecs/ -auto-approve -no-color -input=false plan.out
+      - terragrunt apply --terragrunt-working-dir environment/dev/ecs/ -auto-approve -no-color -input=false plan.out
       # - terragrunt run-all plan --terragrunt-working-dir environment/dev 
       # - terragrunt run-all apply -auto-approve -no-color -input=false
 
