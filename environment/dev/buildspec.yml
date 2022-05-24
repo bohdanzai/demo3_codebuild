@@ -12,7 +12,7 @@ env:
 phases:
   pre_build:
     commands:
-      # - export AWS_PROFILE="default"
+      - export AWS_PROFILE="default"
       - date
       - curl -sSL "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" -o terraform.zip
       - unzip terraform.zip -d /usr/local/bin && chmod +x /usr/local/bin/terraform
