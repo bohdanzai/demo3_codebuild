@@ -48,7 +48,7 @@ resource "aws_launch_template" "webserver_launch_tpl" {
 resource "aws_autoscaling_group" "Demo-ASG-tf" {
   name                 = "${var.app_name}-${var.environment}-ASG"
   desired_capacity     = 2
-  max_size             = 4
+  max_size             = 3
   min_size             = 2
   force_delete         = true
   target_group_arns    = ["${aws_alb_target_group.app.arn}"]
