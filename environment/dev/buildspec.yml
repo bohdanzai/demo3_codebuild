@@ -40,7 +40,7 @@ phases:
       - echo "$TAG"
       - echo "$image_tag"
       - cd "$CODEBUILD_SRC_DIR"
-      - export RUNNING_TASKS=$(aws ecs list-tasks --cluster demo3-dev-cluster | jq -r .taskArns[] | tr '/' ' ' | awk '{print$3}')
+      - export RUNNING_TASKS=`aws ecs list-tasks --cluster demo3-dev-cluster | jq -r .taskArns[] | tr '/' ' ' | awk '{print$3}'`
       - for task in $RUNNING_TASKS; do aws ecs stop-task --cluster demo3-dev-cluster --task $task; done
       - terragrunt plan --terragrunt-working-dir environment/dev/ecs/ -var="image_tag=${TAG}" -no-color -input=false -out plan.out
       # - terragrunt plan --terragrunt-working-dir environment/dev/ecs/ -var="image_tag=0.0.1" -no-color -input=false -out plan.out
